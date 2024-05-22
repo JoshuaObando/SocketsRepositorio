@@ -9,8 +9,8 @@ public class ServidorGUI extends JFrame{
   
     private JTextArea areaLog;
     private ServerSocket servidorSocket;
-    private BufferedWriter escritorLog;
-
+    private BufferedWriter escritorLog;  
+    //hola
     public ServidorGUI() {
         setTitle("Servidor de Chat");
         setSize(400, 300);
