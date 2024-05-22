@@ -1,6 +1,7 @@
 package GUI;
 
+import javax.swing.*;
 
-public class ServidorGUI {
+public class ServidorGUI extends JFrame{
   
 }
