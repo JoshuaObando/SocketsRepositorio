@@ -1,0 +1,11 @@
+Cliente: Hola
+Cliente: Como estas?
+Cliente: Espero estes bien perro
+Cliente: Hola
+Cliente: Como estas?
+Cliente: Espero que bien
+Cliente: Hola
+Cliente: Como estas?
+Cliente: Juan?
+Cliente: IDSUIHUID
+Cliente: 28727
