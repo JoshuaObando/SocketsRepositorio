@@ -50,37 +50,63 @@ public class ServidorGUI extends JFrame{
         private Socket clienteSocket;
         private BufferedReader entradaDelCliente;
         private DataOutputStream salidaAlCliente;
-
+    
         public ManejadorCliente(Socket socket) {
             this.clienteSocket = socket;
         }
-
+    
         @Override
         public void run() {
             try {
                 entradaDelCliente = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream()));
                 salidaAlCliente = new DataOutputStream(clienteSocket.getOutputStream());
-
+    
                 String mensajeCliente;
                 while ((mensajeCliente = entradaDelCliente.readLine()) != null) {
                     String mensajeDescifrado = descifrarMensaje(mensajeCliente);
                     areaLog.append("Cliente: " + mensajeDescifrado + "\n");
                     escritorLog.write("Cliente: " + mensajeDescifrado + "\n");
                     escritorLog.flush();
-                    String respuesta = "Mensaje recibido";
+                    String respuesta = processCommand(mensajeDescifrado);
                     salidaAlCliente.writeBytes(cifrarMensaje(respuesta) + '\n');
                 }
             } catch (IOException e) {
                 areaLog.append("Error: " + e.getMessage() + "\n");
             }
         }
-
+    
         private String cifrarMensaje(String mensaje) {
             return new StringBuilder(mensaje).reverse().toString();
         }
-
+    
         private String descifrarMensaje(String mensaje) {
             return new StringBuilder(mensaje).reverse().toString();
+        }
+    
+        private String processCommand(String command) {
+            String[] parts = command.split(" ", 2);
+            String commandName = parts[0];
+    
+            if ("suma".equals(commandName)) {
+                return solveMathProblem(parts[1]);
+            } else {
+                return "Comando desconocido: " + commandName;
+            }
+        }
+    
+        private String solveMathProblem(String problem) {
+            String[] parts = problem.split("\\+");
+            if (parts.length == 2) {
+                try {
+                    int num1 = Integer.parseInt(parts[0]);
+                    int num2 = Integer.parseInt(parts[1]);
+                    return String.valueOf(num1 + num2);
+                } catch (NumberFormatException e) {
+                    return "Error: los operandos deben ser números enteros.";
+                }
+            } else {
+                return "Error: el formato del problema es incorrecto.";
+            }
         }
     }
 

@@ -3,3 +3,6 @@ Cliente: 10+10
 Cliente: 5+5
 Cliente: 5+3
 Cliente: 5+5
+Cliente: suma 10+10
+Cliente: suma 1000+1
+Cliente: suma -5+-5
