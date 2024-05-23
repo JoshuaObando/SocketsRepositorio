@@ -10,17 +10,17 @@ public class Servidor {
         String clientSentence;
         String response;
 
-        ServerSocket welcomeSocket = new ServerSocket(6789);
+        ServerSocket welcomeSocket = new ServerSocket(6789);//Aca se asigna el puerto y la dirección del servidor
 
         while (true) {
-            Socket connectionSocket = welcomeSocket.accept();
+            Socket connectionSocket = welcomeSocket.accept();//Aca se acepta la conexión del cliente
             BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
             DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 
             clientSentence = inFromClient.readLine();
             response = Comandos(clientSentence) + '\n';
             outToClient.writeBytes(response);
-        }
+        }//Fin del while
     }
 
     private static String Comandos(String command) {
@@ -45,7 +45,7 @@ public class Servidor {
             default:
                 return "Comando desconocido: " + commandName;
         }
-    }
+    }//Este método sirve procesar los comandos que envía el cliente
 
     private static String ResolverProblema(String problema, BiFunction<Double, Double, Double> operacion) {
         String[] parts = problema.split("\\s+");
@@ -62,5 +62,5 @@ public class Servidor {
         } else {
             return "Error: el formato del problema es incorrecto.";
         }
-    }
+    }//Este método sirve para resolver los problemas de suma, resta, multiplicación y division
 }
