@@ -25,7 +25,7 @@ public class ServidorGUI extends JFrame{
         add(areaLog);
 
         try {
-            escritorLog = new BufferedWriter(new FileWriter("chat_log.txt", true));
+            escritorLog = new BufferedWriter(new FileWriter("chat_log.txt", true));//esta linea es para que el archivo se abra en modo de escritura
         } catch (IOException e) {
             areaLog.append("Error al abrir el archivo de registro: " + e.getMessage() + "\n");
         }
@@ -69,7 +69,7 @@ public class ServidorGUI extends JFrame{
                     areaLog.append("Cliente: " + mensajeDescifrado + "\n");
                     escritorLog.write("Cliente: " + mensajeDescifrado + "\n");
                     escritorLog.flush();
-                    String respuesta = processCommand(mensajeDescifrado);
+                    String respuesta = Comandos(mensajeDescifrado);
                     salidaAlCliente.writeBytes(cifrarMensaje(respuesta) + '\n');
                 }
             } catch (IOException e) {
@@ -86,19 +86,19 @@ public class ServidorGUI extends JFrame{
         }
 
         
-            private String processCommand(String command) {
-                String[] parts = command.split(" ", 2);
-                String commandName = parts[0];
+            private String Comandos(String command) {
+                String[] partes = command.split(" ", 2);
+                String commandName = partes[0];
         
                 switch (commandName) {
                     case "suma":
-                        return ResolverProblema(parts[1], (a, b) -> a + b);
+                        return ResolverProblema(partes[1], (a, b) -> a + b);
                     case "resta":
-                        return ResolverProblema(parts[1], (a, b) -> a - b);
+                        return ResolverProblema(partes[1], (a, b) -> a - b);
                     case "multiplica":
-                        return ResolverProblema(parts[1], (a, b) -> a * b);
+                        return ResolverProblema(partes[1], (a, b) -> a * b);
                     case "divide":
-                        return ResolverProblema(parts[1], (a, b) -> {
+                        return ResolverProblema(partes[1], (a, b) -> {
                             if (b == 0) {
                                 throw new ArithmeticException("No se puede dividir por cero.");
                             }
@@ -108,7 +108,8 @@ public class ServidorGUI extends JFrame{
                     default:
                         return "Comando desconocido: " + commandName;
                 }
-            }
+            }//Este método sirve procesar los comandos que envía el cliente
+
         
             private String ResolverProblema(String problema, BiFunction<Double, Double, Double> operacion) {
                 String[] parts = problema.split("\\s+");
@@ -127,7 +128,7 @@ public class ServidorGUI extends JFrame{
                 }
             }
 
-    }
+    }//Este método sirve para resolver los problemas de suma, resta, multiplicación y division
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

@@ -18,12 +18,12 @@ public class Servidor {
             DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 
             clientSentence = inFromClient.readLine();
-            response = processCommand(clientSentence) + '\n';
+            response = Comandos(clientSentence) + '\n';
             outToClient.writeBytes(response);
         }
     }
 
-    private static String processCommand(String command) {
+    private static String Comandos(String command) {
         String[] parts = command.split(" ", 2);
         String commandName = parts[0];
 
