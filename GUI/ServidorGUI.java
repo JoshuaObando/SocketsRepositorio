@@ -66,11 +66,13 @@ public class ServidorGUI extends JFrame{
                 String mensajeCliente;
                 while ((mensajeCliente = entradaDelCliente.readLine()) != null) {
                     String mensajeDescifrado = descifrarMensaje(mensajeCliente);
+                    areaLog.append("Mensaje recibido: " + mensajeDescifrado + "\n");//esta linea es para que el mensaje recibido se escriba en el archivo de registro
                     areaLog.append("Cliente: " + mensajeDescifrado + "\n");
                     escritorLog.write("Cliente: " + mensajeDescifrado + "\n");
                     escritorLog.flush();
                     String respuesta = Comandos(mensajeDescifrado);
                     salidaAlCliente.writeBytes(cifrarMensaje(respuesta) + '\n');
+                    
                 }
             } catch (IOException e) {
                 areaLog.append("Error: " + e.getMessage() + "\n");

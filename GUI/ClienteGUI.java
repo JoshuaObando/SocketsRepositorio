@@ -40,6 +40,7 @@ public class ClienteGUI extends JFrame{
                     String mensaje = campoEntrada.getText();
                     salidaAlServidor.writeBytes(cifrarMensaje(mensaje) + '\n');
                     String respuesta = entradaDelServidor.readLine();
+                    areaChat.append("Servidor confirmó el mensaje\n");
                     areaChat.append("Servidor: " + descifrarMensaje(respuesta) + "\n");
                     campoEntrada.setText("");
                 } catch (IOException ex) {
