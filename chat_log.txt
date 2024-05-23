@@ -1,1 +1,5 @@
 Cliente: Hola
+Cliente: 10+10
+Cliente: 5+5
+Cliente: 5+3
+Cliente: 5+5
